@@ -5,19 +5,22 @@
 #define col 100
 #define lin 100
 char labirinto[lin][col];
-FILE* in
 
 int inicializar_labirinto (){
+    FILE* in;
     char ch;
-    int numero_de_linhas=0, numero_de_colunas=0;
+    int numero_de_linhas=0, numero_de_colunas=0, aux;
 
-    fseek(in, 0, SEEK_SET); 
+    in = fopen("asd.txt","rt");
+
     if(in==NULL){
-	return 0;
+        fclose(in);
+	return -1;
     }else{
 	while( (ch=fgetc(in))!= EOF ){
 	    if(ch == '\n'){
 		numero_de_linhas++;
+                aux = numero_de_colunas;
 		numero_de_colunas=0;
 		
 	    }
@@ -27,21 +30,29 @@ int inicializar_labirinto (){
 	    }
 	}
     }
-
-   return OK;
+    fclose(in);
+    return numero_de_linhas*aux;
 }
 
-void mostrar_labirinto() 
-{
-
-
+int checa_existencia(char c){
+  int i,j, cont=0;
+    for(i=0;i<col;i++){
+	for(j=0;j<=lin;j++){
+	   if(labirinto[i][j] == c){
+             cont++;
+	   }
+    	}
+    }
+    return cont;
 }
+
+
 
 int main(){
-    
+    FILE* in;
     in = fopen("asd.txt","rt");
-    FILE* out;
-    out = fopen("teste.txt","wt");
+    //FILE* out;
+    //out = fopen("teste.txt","wt");
     int numero_de_linhas=0, numero_de_colunas=0;
     char ch;
     if(in==NULL){
@@ -57,7 +68,7 @@ int main(){
 
     numero_de_colunas=numero_de_colunas/numero_de_linhas;
 
-    int aux = inicializar_labirinto(in);
+    int aux = inicializar_labirinto();
     
     int i,j;
     for(i=0;i<numero_de_linhas;i++){
