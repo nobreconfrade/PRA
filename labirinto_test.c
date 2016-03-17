@@ -1,4 +1,5 @@
-//gcc -Wall -I/usr/include labirinto.c labirinto_teste.c -L/usrlib -lcunit -o wow
+//gcc -Wall -I/usr/include labirinto.c labirinto_test.c -L/usrlib -lcunit -o wow
+//sudo modprobe pcspkr
 
 #include "CUnit/CUnit.h"
 #include "CUnit/Basic.h"
@@ -32,28 +33,28 @@ void test_case_sample(void)
 }
 
 void ler_arquivo_labirinto_test(void) {
-  CU_ASSERT_NOT_EQUAL( inicializar_labirinto(), -1);
+  CU_ASSERT_NOT_EQUAL( conta_num_de_linhas(), -1);
 }
 
 void verificar_labirinto_vazio_test(void) {
-  CU_ASSERT_NOT_EQUAL( inicializar_labirinto(), 0);
+  CU_ASSERT_NOT_EQUAL( conta_num_de_linhas()*conta_num_de_colunas(), 0);
 
 }
 
 void verifica_labirinto_com_paredes(void) {
-  CU_ASSERT_NOT_EQUAL( checa_existencia('#'), 0);
+  CU_ASSERT_NOT_EQUAL( verifica_a_existencia('#'), 0);
 }
 
 void verifica_labirinto_com_wumpus(void) {
-  CU_ASSERT_EQUAL( checa_existencia('W'), 1);
+  CU_ASSERT_EQUAL( verifica_a_existencia('W'), 1);
 }
 
 void verifica_labirinto_com_saida(void) {
-  CU_ASSERT_EQUAL( checa_existencia('E'), 1);
+  CU_ASSERT_EQUAL( verifica_a_existencia('E'), 1);
 }
 
 void verifica_labirinto_com_entrada(void) {
-  CU_ASSERT_EQUAL( checa_existencia('S'), 1);
+  CU_ASSERT_EQUAL( verifica_a_existencia('S'), 1);
 }
 
 
@@ -84,15 +85,11 @@ int main ( void )
    /* ADICIONA OS TESTES */
    if ( (NULL == CU_add_test(pSuite, "leu arquivo", ler_arquivo_labirinto_test)) ||
 	(NULL == CU_add_test(pSuite, "arquivo vazio", verificar_labirinto_vazio_test)) ||
-	/* AQUI DEFINE O MOCK */ 
 	(NULL == CU_add_test(pSuite, "tem paredes", verifica_labirinto_com_paredes)) ||        
 	(NULL == CU_add_test(pSuite, "tem wumpus", verifica_labirinto_com_wumpus)) ||
 	(NULL == CU_add_test(pSuite, "tem saida", verifica_labirinto_com_saida)) ||
-	(NULL == CU_add_test(pSuite, "tem entrada", verifica_labirinto_com_entrada)) ||
-	(NULL == CU_add_test(pSuite, "anda para direita", mock_test)) ||
-	(NULL == CU_add_test(pSuite, "anda para traz", mock_test)) ||
-	(NULL == CU_add_test(pSuite, "come", mock_test)) ||
-	(NULL == CU_add_test(pSuite, "saiu", mock_test))
+	(NULL == CU_add_test(pSuite, "tem entrada", verifica_labirinto_com_entrada))
+
       )
    {
       CU_cleanup_registry();

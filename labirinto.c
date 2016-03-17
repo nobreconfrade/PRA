@@ -267,7 +267,6 @@ int verifica_wumpus(char **labirinto,int numero_de_linhas,int numero_de_colunas)
 
 //PRINCIPAL FUNÇÃO DO SISTEMA
 int mover(char** labirinto,int linha,int coluna,int numero_de_linhas,int numero_de_colunas,int orientacao, double gold,int flechas){
-	int mensagem;//dis a msg que tem que falar
 	
 	int linha_anterior = linha;//GUARDA A POSIÇÃO NA linha ANTES DE ALTERAR
 	int coluna_anterior = coluna;//GUARDA A POSIÇÃO NA coluna ANTES DE ALTERAR
@@ -281,12 +280,10 @@ int mover(char** labirinto,int linha,int coluna,int numero_de_linhas,int numero_
 	}
 	//VERIFICA SE O FIM ESTA PROXIMO E SE MATOU O WUMPUS(pois sem matar não é possivel passar a fase)
 	if(verifica_prossimidade(linha,coluna,labirinto,'E')==1 && verifica_wumpus(labirinto,numero_de_linhas,numero_de_colunas)==0){
-		if(verifica_prossimidade(linha,coluna,labirinto,'E')==1){
-			printf("oi\n");
-		}
-		retorna_posicao(&l,&c,labirinto,'E');/*################################################################################*/
-		labirinto[linha_anterior][coluna_anterior]='.';//COLOCA UM . NA POSIÇÃO QUE O HEROI ESTAVA
-		labirinto[l][c]='H';//COLOCA O HEROI NO FIM DO LABIRINTO
+		
+		//retorna_posicao(&l,&c,labirinto,'E');/*################################################################################*/
+		//labirinto[linha_anterior][coluna_anterior]='.';//COLOCA UM . NA POSIÇÃO QUE O HEROI ESTAVA
+		//labirinto[l][c]='H';//COLOCA O HEROI NO FIM DO LABIRINTO
 		imprime_labirinto(labirinto,numero_de_linhas,numero_de_colunas,gold,flechas,0);//IMPRIME O LABIRINTO
 		fim_de_jogo();
 		return 1;
@@ -455,14 +452,14 @@ void perigo(){
 }
 //SOM DE SAPATOS AO CAMINHAR EM CAUSADA
 void passo(){
-	//printf("\a\a\a\a\a\a\a\a\a\a\a");
-	//printf("\7\7\7\7\7\7\7\7\7\7\7");
+	printf("\a\a\a\a\a\a\a\a\a\a\a");
+	printf("\7\7\7\7\7\7\7\7\7\7\7");
 	usleep(200000);
 }
 //SOM DO BEEP PARA O "TOCK DE 5 SEGUNDOS"
 void beep(){
-	//printf("\a\a\a\a\a\a\a\a\a\a\a");
-	//printf("\7\7\7\7\7\7\7\7\7\7\7");
+	printf("\a\a\a\a\a\a\a\a\a\a\a");
+	printf("\7\7\7\7\7\7\7\7\7\7\7");
 	usleep(1000000);
 }
 //TOCK DE 5 SEGUNDOS KKKKKKK
