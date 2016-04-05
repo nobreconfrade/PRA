@@ -7,7 +7,9 @@ with open('routes.txt','r', buffering = 4096) as f:
 		# print (i)
 		aux = 0
 		for j in i:
-			# if (len(j) >= countLen[aux])
-			countLen[aux] = len(j)
+			if (len(j) >= countLen[aux]):
+				countLen[aux] = len(j)
+				# if (countLen[aux] == 35):
+				# 	print (j)
 			aux += 1
 print (countLen)	
